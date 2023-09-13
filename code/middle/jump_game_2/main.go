@@ -6,5 +6,7 @@ func jump(nums []int) int {
 		return 0
 	}
 
+	// TODO: implement
+
 	return 0
 }
