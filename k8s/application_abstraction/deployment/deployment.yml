@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 10%
+      maxUnavailable: 10%
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+          app: nginx
+    spec:
+      containers:
+        - image: quay.io/testing-farm/nginx:1.12
+          name: nginx
+          ports:
+            - containerPort: 80
+              protocol: TCP
+...

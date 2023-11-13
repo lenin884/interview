@@ -1,0 +1,25 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 200 # если не успеет выполниться за 200 секунд, то не запускать. При падении если кол-во меньше 100 то продолжает работать
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 100
+      template:
+        spec:
+          containers:
+            - name: hello
+              image: quay.io/prometheus/busybox
+              args:
+                - /bin/sh
+                - -c
+                - date; echo Hello from the Kubernetes cluster
+          restartPolicy: Never

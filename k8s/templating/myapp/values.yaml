@@ -1,0 +1,26 @@
+replicas: 3
+
+image:
+  repository: nginx
+  tag: 1.12
+
+service:
+  internalPort: 80
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 80m
+    memory: 64Mi
+
+annotations:
+  one: two
+  foo: bar
+  test: ok
+
+env:
+  FOO: BAR
+  TEST: TEST1
+
